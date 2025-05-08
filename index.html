@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jegan Baskar - Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; /* Reset default body margin */
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+        html{
+          scroll-behavior: smooth;
+        }
+        
+        section {
+            /*min-height: 100vh;  Make each section at least the height of the viewport */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0; /* Remove default section padding */
+            border-bottom: 1px solid #e5e7eb; /* Add border between sections */
+        }
+
+        /* Last section should not have a border-bottom */
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .container{
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+
+        #about {
+            background-color: #f7fafc; /* Light background for about section */
+        }
+
+        #skills {
+            background-color: #edf2f7; /* Slightly darker background for skills */
+        }
+
+        #projects {
+            background-color: #f7fafc; /* Light background for projects */
+        }
+
+        #certifications{
+          background-color: #edf2f7;
+        }
+
+        #contact {
+            background-color: #f7fafc; /* Light background for contact */
+        }
+
+        header {
+            background-color: #4f46e5; /* Blue header */
+            color: white;
+            padding: 1rem 0;
+            position: fixed; /* Stick header to top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            border-bottom: 1px solid #6b7280;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.875rem; /* text-2xl */
+            font-weight: 600;      /* font-semibold */
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            margin-left: 1.5rem; /* ml-6 */
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500; /* font-medium */
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #e0f2fe; /* Light blue hover */
+        }
+
+        #hamburger-btn {
+            display: none; /* Hide on desktop */
+            color: white;
+            background: none;
+            border: none;
+            font-size: 1.5rem; /* text-xl */
+            cursor: pointer;
+            padding: 0;
+        }
+
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 50;
+        }
+
+        #mobile-menu .bg-gray-800 {
+            width: 80%;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            padding: 1.5rem;
+        }
+
+        #mobile-menu .flex {
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+
+        #mobile-menu nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #mobile-menu nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        #mobile-menu nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem; /* text-lg */
+            font-weight: 500;
+        }
+
+        #mobile-menu .hidden {
+            display: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            font-size: 2.25rem; /* text-3xl */
+            font-weight: 600;      /* font-semibold */
+            color: #4f46e5;    /* Blue 700 */
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        #about .flex {
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        #about .md\:flex-row {
+            flex-direction: row;
+        }
+
+        #about img {
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 20rem; /* w-64 */
+            height: 20rem;  /* h-64 */
+            object-fit: cover;
+        }
+
+        #about h2 {
+            font-size: 2.25rem; /* text-3xl */
+            font-weight: 600;      /* font-semibold */
+            color: #4f46e5;    /* Blue 700 */
+            margin-bottom: 1rem;
+        }
+
+        #about p {
+            color: #4a5568; /* Gray 700 */
+            line-height: 1.75;  /* leading-relaxed */
+        }
+
+        #skills .grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem; /* gap-6 */
+        }
+
+        @media (min-width: 768px) {
+            #skills .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #skills .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        #skills .bg-white {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;    /* p-6 */
+            display: flex;
+            align-items: center;
+            gap: 1rem;       /* gap-4 */
+        }
+
+        #skills i {
+            color: #4f46e5;    /* Blue 500 */
+            font-size: 1.5rem;  /* text-2xl */
+        }
+
+        #skills h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;      /* font-semibold */
+            color: #2d3748;    /* Gray 800 */
+        }
+
+        #skills p {
+            color: #718096; /* Gray 600 */
+        }
+
+        #projects .grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem; /* gap-6 */
+        }
+
+        @media (min-width: 768px) {
+            #projects .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #projects .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        #projects .bg-white {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;    /* p-6 */
+        }
+
+        #projects h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;      /* font-semibold */
+            color: #2d3748;    /* Gray 800 */
+            margin-bottom: 0.5rem;  /* mb-2 */
+        }
+
+        #projects p {
+            color: #718096; /* Gray 600 */
+            margin-bottom: 1rem;  /* mb-4 */
+        }
+
+        #projects a {
+            color: #4f46e5;    /* Blue 500 */
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        #projects a:hover {
+            color: #3b82f6; /* Blue 700 */
+        }
+
+        #projects a i {
+            margin-left: 0.25rem; /* ml-1 */
+            font-size: 1rem;
+        }
+
+        #certifications .grid{
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #certifications .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #certifications .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        #certifications .bg-white{
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #certifications i{
+            color: #4f46e5;
+            font-size: 1.5rem;
+        }
+
+        #certifications h3{
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        #certifications p{
+            color: #718096;
+        }
+
+        #contact .bg-white {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;    /* p-6 */
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        #contact .grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem; /* gap-6 */
+        }
+
+        @media (min-width: 768px) {
+            #contact .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        #contact label {
+            display: block;
+            color: #4a5568; /* Gray 700 */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 600;      /* font-bold */
+            margin-bottom: 0.5rem;  /* mb-2 */
+        }
+
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact input[type="tel"],
+        #contact textarea {
+            width: 100%;
+            padding: 0.75rem 1rem; /* py-3 px-4 */
+            border-radius: 0.375rem; /* rounded-md */
+            border: 1px solid #e2e8f0; /* border-gray-200 */
+            color: #4a5568;         /* Gray 700 */
+            outline: none;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); /* shadow-sm */
+            transition: border-color 0.2s ease;
+        }
+
+        #contact input[type="text"]:focus,
+        #contact input[type="email"]:focus,
+        #contact input[type="tel"]:focus,
+        #contact textarea:focus {
+            border-color: #4f46e5; /* Blue 500 */
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        #contact textarea {
+            height: 8rem;      /* h-32 */
+            resize: vertical;
+        }
+
+        #contact button[type="submit"],
+        #contact a {
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-weight: 600;      /* font-bold */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        #contact button[type="submit"] {
+            background-color: #4f46e5; /* Blue 500 */
+        }
+
+        #contact button[type="submit"]:hover {
+            background-color: #3b82f6; /* Blue 700 */
+        }
+
+        #contact a {
+            background-color: #10b981; /* Green 500 */
+        }
+
+        #contact a:hover {
+            background-color: #059669; /* Green 700 */
+        }
+
+        #contact a i {
+            margin-left: 0.5rem; /* ml-2 */
+            font-size: 1.25rem;
+        }
+
+        footer {
+            background-color: #4a5568; /* Gray 800 */
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            border-top: 1px solid #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            header nav {
+                display: none;
+            }
+
+            #hamburger-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white py-4 md:py-6">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-semibold">Jegan Baskar</h1>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-4 md:space-x-6">
+                    <li><a href="#about" class="hover:text-blue-200 transition duration-300 nav-links">About</a></li>
+                    <li><a href="#skills" class="hover:text-blue-200 transition duration-300 nav-links">Skills</a></li>
+                    <li><a href="#projects" class="hover:text-blue-200 transition duration-300 nav-links">Projects</a></li>
+                    <li><a href="#contact" class="hover:text-blue-200 transition duration-300 nav-links">Contact</a></li>
+                </ul>
+            </nav>
+            <button id="hamburger-btn" class="md:hidden text-white focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 z-50">
+        <div class="bg-gray-800 w-80 h-full absolute right-0 p-6">
+            <div class="flex justify-end mb-4">
+                <button id="close-menu-btn" class="text-white focus:outline-none" aria-label="Close Navigation">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="block">
+                <ul class="space-y-4">
+                    <li><a href="#about" class="block text-lg text-white hover:text-blue-200 transition duration-300">About</a></li>
+                    <li><a href="#skills" class="block text-lg text-white hover:text-blue-200 transition duration-300">Skills</a></li>
+                    <li><a href="#projects" class="block text-lg text-white hover:text-blue-200 transition duration-300">Projects</a></li>
+                    <li><a href="#contact" class="block text-lg text-white hover:text-blue-200 transition duration-300">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <main>
+        <section id="about" class="container mx-auto py-12 px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-8" style="min-height: calc(100vh - 80px);">
+                <div class="md:w-1/3">
+                    <img src="jegan blazer.jpg" alt="Jegan Baskar" class="rounded-full shadow-lg w-64 h-64 object-cover">
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl font-semibold text-blue-700 mb-4">About Me</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        I am a passionate Java Full Stack Developer with hands-on experience in designing, developing, and deploying robust web applications. My expertise spans across front-end technologies like HTML, CSS, JavaScript, React, and powerful back-end frameworks such as Spring Boot and Hibernate, all backed by solid knowledge of REST APIs, MySQL, and MongoDB.
+
+With a strong foundation in object-oriented programming, data structures, and software development principles, I aim to build scalable and user-centric solutions. I’m also well-versed in version control (Git), Agile methodologies, and DevOps practices like CI/CD and Docker.
+
+I’m always eager to learn new technologies, collaborate with diverse teams, and take on challenging projects that push my capabilities.
+
+
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="bg-gray-200 py-12 md:py-16" style="min-height: calc(100vh - 80px);">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl font-semibold text-blue-700 mb-8 text-center">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                        <i class="fas fa-code text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Frontend</h3>
+                            <p class="text-gray-600">HTML, CSS, JavaScript</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                        <i class="fab fa-react text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Framework</h3>
+                            <p class="text-gray-600">React.js, Angular.js</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                        <i class="fas fa-server text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Backend</h3>
+                            <p class="text-gray-600">Python, Node.js</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                        <i class="fas fa-database text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Database</h3>
+                            <p class="text-gray-600">MySQL</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                        <i class="fab fa-github text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Source Control</h3>
+                            <p class="text-gray-600">GitHub</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+                         <i class="fas fa-users text-blue-500 text-2xl"></i>
+                         <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Soft Skills</h3>
+                            <p class="text-gray-600">Communication, Problem Solving, Teamwork</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container mx-auto py-12 px-4 md:px-6" style="min-height: calc(100vh - 80px);">
+            <h2 class="text-3xl font-semibold text-blue-700 mb-8 text-center">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Robotic Process Automation (RPA)</h3>
+                    <p class="text-gray-600 mb-4">Developed a Language Translator Chatbot using UiPath.</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300 inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Android Development</h3>
+                    <p class="text-gray-600 mb-4">Developed an interactive and responsive application.</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300 inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Frontend Web Development</h3>
+                    <p class="text-gray-600 mb-4">Developed an E-Commerce website.</p>
+                    <a href="#" class="text-blue-500 hover:text-blue-700 transition duration-300 inline-flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="bg-gray-200 py-12 md:py-16" style="min-height: calc(100vh - 80px);">
+            <div class="container mx-auto px-4 md:px-6">
+                <h2 class="text-3xl font-semibold text-blue-700 mb-8 text-center">Certifications</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+                        <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Great Learning</h3>
+                            <p class="text-gray-600">Java (Intermediate)</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+                        <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Simplilearn</h3>
+                            <p class="text-gray-600">Python, Angular Js, React Js</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+                        <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">OfficeMaster</h3>
+                            <p class="text-gray-600">PowerBI</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+                        <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">Microsoft</h3>
+                            <p class="text-gray-600">Generative AI</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-4 flex items-center gap-4">
+                        <i class="fas fa-certificate text-blue-500 text-2xl"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800">NxtWave</h3>
+                            <p class="text-gray-600">Generative AI Model</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container mx-auto py-12 px-4 md:px-6" style="min-height: calc(100vh - 80px);">
+            <h2 class="text-3xl font-semibold text-blue-700 mb-8 text-center">Contact Me</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-700 text-sm font-bold mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+                        <input type="tel" id="phone" name="phone" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                        <textarea id="message" name="message" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32 resize-y"></textarea>
+                    </div>
+                    <div class="md:col-span-2 flex justify-between items-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">
+                            Send Message
+                        </button>
+                        <a href="Jegan B.pdf.pdf" download="Jegan_Baskar_Resume.pdf" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline">
+                            Download CV <i class="fas fa-download ml-2"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>© 2025 Jegan Baskar. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById("hamburger-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const mobileMenuLinks = mobileMenu.querySelectorAll("a");
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle("hidden");
+        }
+
+        hamburgerBtn.addEventListener("click", toggleMobileMenu);
+        closeMenuBtn.addEventListener("click", toggleMobileMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener("click", toggleMobileMenu);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(event.target) && event.target !== hamburgerBtn) {
+                toggleMobileMenu();
+            }
+        });
+
+       function updateActiveNavLink() {
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 100 && window.scrollY < sectionTop + sectionHeight - 100) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNavLink);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
